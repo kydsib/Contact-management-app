@@ -12,105 +12,139 @@
 	<body>
 		<nav>
 			<ul>
-				<li id="add-new">Add new contact</li>
-				<li id="show-all">View all contacts</li>
+				<li class="nav-item" id="add-new">Add new contact</li>
+				<li class="nav-item"  id="show-all">View all contacts</li>
 			</ul>
 		</nav>
-
 		<div class="container">
-			<div id="error"></div>
+			<div id="error">
+			</div>
+
 			<form id="form">
-				<legend>Required:</legend>
 				<div class="input-box">
-					<label for="fname">First Name</label>
-					<input
-						id="fname"
-						maxlength="30"
-						value=""
-						name="name"
-						pattern="^[a-zA-Z\s]*$"
-						required
-						type="text"
-					/>
-					<span class="validity"></span>
-					<p>Letters only no longer than 30 charecters</p>
+					<div>
+						<label for="fname">First Name</label>	
+					</div>
+					<div>
+						<input
+							id="fname"
+							maxlength="30"
+							value=""
+							name="name"
+							pattern="^[a-zA-Z\s]*$"
+							required
+							type="text"
+							placeholder="Max 30 charecters"
+						/>
+						<span class="validity"></span>
+					</div>
 				</div>
 				<div class="input-box">
-					<label for="lname">Last Name</label>
-					<input
-						id="lname"
-						value=""
-						maxlength="30"
-						name="surname"
-						pattern="^[a-zA-Z\s]*$"
-						required
-						type="text"
-					/>
-					<span class="validity"></span>
-					<p>Letters only no longer than 30 charecters</p>
+					<div class="for-label">
+						<label for="lname">Last Name</label>
+					</div>
+					<div>
+						<input
+							id="lname"
+							value=""
+							maxlength="30"
+							name="surname"
+							pattern="^[a-zA-Z\s]*$"
+							required
+							type="text"
+							placeholder="Max 30 charecters"
+						/>
+						<span class="validity"></span>
+					</div>
+					
 				</div>
 				<div class="input-box">
-					<label for="year">Birth Date</label>
-					<input id="year" name="birthday" required type="date" />
-					<span class="validity"></span>
+					<div>
+							<label for="year">Birth Date</label>
+					</div>
+					<div>
+						<input id="year" name="birthday" required type="date" />
+						<span class="validity"></span>
+					</div>
+					
 				</div>
 				<div class="input-box">
-					<label for="telNo">Phone Number</label>
-					<input
-						id="telNo"
-						maxlength="18"
-						name="phone"
-						pattern="^[0-9 ]+$"
-						required
-						type="tel"
-					/>
-					<span class="validity"></span>
+					<div class="for-label">
+						<label for="telNo">Phone Number</label>
+					</div>
+					<div>
+						<input
+							id="telNo"
+							maxlength="18"
+							name="phone"
+							pattern="^[0-9 ]+$"
+							required
+							type="tel"
+							placeholder="Max 18 digits"
+						/>
+						<span class="validity"></span>
+					</div>
+					
+					
+					
 				</div>
 				<div class="input-box">
-					<label for="email">E-mail</label>
-					<input
-						id="email"
-						maxlength="60"
-						name="email"
-						required
-						type="email"
-					/>
-					<span class="validity"></span>
+					<div class="for-label">
+						<label for="email">E-mail</label>
+					</div>
+					<div>
+						<input
+							id="email"
+							maxlength="40"
+							name="email"
+							required
+							type="email"
+							placeholder="Max 40 charecters"
+						/>
+						<span class="validity"></span>
+					</div>
+					
+					
 				</div>
-				<div class="input-box"></div>
-
-				<legend>
-					Optional: (no more than 40 char per input field)
-				</legend>
-				<label for="address">Address</label><br />
-				<input
-					id="address"
-					maxlength="40"
-					name="address"
-					type="text"
-				/><br />
-				<label for="zip">Zip/Postal Code</label><br />
-				<input id="zip" maxlength="40" name="zip" type="text" /><br />
-
-				<button id="form-btn" type="submit">Submit</button>
+				<div class="input-box">
+						<label for="address">Address</label><br />
+						<input
+							id="address"
+							maxlength="40"
+							name="address"
+							type="text"
+							placeholder="Max 40 charecters"
+						/><br />
+				</div>
+				
+				<div class="input-box">
+					<label for="zip">Zip/Postal Code</label><br />
+					<input id="zip" maxlength="40" name="zip" type="text" placeholder="Max 40 charecters" /><br />
+				</div>
+				
+				
+				<button id="form-btn" class="btn" type="submit">Submit</button>
 			</form>
 
-			<table id='contact-table' >
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Surname</th>
-						<th>Brithday</th>
-						<th>Phone</th>
-						<th>E-mail</th>
-						<th>Address</th>
-						<th>Zip/Postal Code</th>
-					</tr>
-					<tbody id="contact-list">
-
-					</tbody>
-				</thead>
-			</table>
+			<div class="table-container">
+					<table id='contact-table' >
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Surname</th>
+									<th>Brithday</th>
+									<th>Phone</th>
+									<th>E-mail</th>
+									<th>Address</th>
+									<th>Zip Code</th>
+								</tr>
+								<tbody id="contact-list">
+			
+								</tbody>
+							</thead>
+						</table>
+			</div>
+			
 		</div>
 	</body>
 	<script src="script.js"></script>

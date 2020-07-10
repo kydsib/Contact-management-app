@@ -14,8 +14,6 @@ const email = document.getElementById('email')
 const address = document.getElementById('address')
 const zip = document.getElementById('zip')
 const submitBtn = document.getElementById('form-btn')
-const saveButtons = document.getElementsByClassName('btn-save')
-const editButtons = document.getElementsByClassName('btn-edit')
 
 // GLOBAL VARIABLES
 
@@ -36,7 +34,7 @@ const generateId = () => {
 
 const getValues = () => {
 	let data = {}
-	// loop trough form elements and get key value pairs
+	// loop trough form elements and get name value pairs
 	Object.keys(form.elements).forEach(key => {
 		let element = form.elements[key]
 
@@ -93,11 +91,16 @@ const deleteContactFromList = value => {
 	)
 	commitContactToLS(newData)
 	printContactsToScreen()
+
+	if (getDataFromLocalStore().length === 0) {
+		console.log('No contacts to show')
+		contactTable.style.display = 'none'
+	}
+	form.reset()
 }
 
 const editContact = item => {
 	editIsActive = !editIsActive
-	console.log(editIsActive)
 	submitBtn.style.display = 'none'
 
 	let dataFormLs = getDataFromLocalStore().filter(
@@ -147,10 +150,10 @@ const renderContact = item => {
 		})" >Delete</button></td>
 		<td><button class="btn btn-edit" ${
 			editIsActive ? 'disabled' : ''
-		}  onclick="editContact(${item.id})" >Edit</button></td>
+		}  onclick="editContact(${item.id})">Edit</button></td>
 		<td><button class="btn btn-save" ${
 			editIsActive ? '' : 'disabled'
-		} onclick="saveEditedValues(${item.id})" >Save Changes</button></td>
+		} onclick="saveEditedValues(${item.id})">Save</button></td>
 	</tr>
 	`
 	contactList.insertAdjacentHTML('beforeend', markup)
@@ -169,9 +172,9 @@ showAll.addEventListener('click', () => {
 		contactTable.style.display = 'block'
 	} else {
 		contactTable.style.display = 'none'
-		console.log(messages.length)
+
 		if (messages.length === 0) {
-			messages.push('Currently you have no contacts')
+			messages.push('No existing contacts found')
 			errorMessage.innerText = messages
 		} else {
 			errorMessage.innerText = messages
