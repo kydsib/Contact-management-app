@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<meta content="ie=edge" http-equiv="X-UA-Compatible" />
+
+		<link href="./styles.css" rel="stylesheet" />
+
+		<title>Adress Book</title>
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li id="add-new">Add new contact</li>
+				<li id="show-all">View all contacts</li>
+			</ul>
+		</nav>
+
+		<div class="container">
+			<div id="error"></div>
+			<form id="form">
+				<legend>Required:</legend>
+				<div class="input-box">
+					<label for="fname">First Name</label>
+					<input
+						id="fname"
+						maxlength="30"
+						value=""
+						name="name"
+						pattern="^[a-zA-Z\s]*$"
+						required
+						type="text"
+					/>
+					<span class="validity"></span>
+					<p>Letters only no longer than 30 charecters</p>
+				</div>
+				<div class="input-box">
+					<label for="lname">Last Name</label>
+					<input
+						id="lname"
+						value=""
+						maxlength="30"
+						name="surname"
+						pattern="^[a-zA-Z\s]*$"
+						required
+						type="text"
+					/>
+					<span class="validity"></span>
+					<p>Letters only no longer than 30 charecters</p>
+				</div>
+				<div class="input-box">
+					<label for="year">Birth Date</label>
+					<input id="year" name="birthday" required type="date" />
+					<span class="validity"></span>
+				</div>
+				<div class="input-box">
+					<label for="telNo">Phone Number</label>
+					<input
+						id="telNo"
+						maxlength="18"
+						name="phone"
+						pattern="^[0-9 ]+$"
+						required
+						type="tel"
+					/>
+					<span class="validity"></span>
+				</div>
+				<div class="input-box">
+					<label for="email">E-mail</label>
+					<input
+						id="email"
+						maxlength="60"
+						name="email"
+						required
+						type="email"
+					/>
+					<span class="validity"></span>
+				</div>
+				<div class="input-box"></div>
+
+				<legend>
+					Optional: (no more than 40 char per input field)
+				</legend>
+				<label for="address">Address</label><br />
+				<input
+					id="address"
+					maxlength="40"
+					name="address"
+					type="text"
+				/><br />
+				<label for="zip">Zip/Postal Code</label><br />
+				<input id="zip" maxlength="40" name="zip" type="text" /><br />
+
+				<button id="form-btn" type="submit">Submit</button>
+			</form>
+
+			<table id='contact-table' >
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Brithday</th>
+						<th>Phone</th>
+						<th>E-mail</th>
+						<th>Address</th>
+						<th>Zip/Postal Code</th>
+					</tr>
+					<tbody id="contact-list">
+
+					</tbody>
+				</thead>
+			</table>
+		</div>
+	</body>
+	<script src="script.js"></script>
+</html>
