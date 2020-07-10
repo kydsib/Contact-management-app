@@ -95,6 +95,7 @@ const deleteContactFromList = value => {
 	if (getDataFromLocalStore().length === 0) {
 		console.log('No contacts to show')
 		contactTable.style.display = 'none'
+		submitBtn.style.display = 'initial'
 	}
 	form.reset()
 }
