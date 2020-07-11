@@ -129,3 +129,8 @@ button:focus {
 button:focus {
 	outline: none;
 }
+
+button:disabled {
+	background: #8695a7;
+	cursor: none;
+}

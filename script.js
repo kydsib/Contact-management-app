@@ -68,6 +68,8 @@ const manageValueStoring = data => {
 			messages.push('This e-mail already exist')
 		} else {
 			contactInfo.push(data)
+			console.log('magage value storing inner call')
+			console.log(contactInfo)
 			commitContactToLS(contactInfo)
 			form.reset()
 			messages.length = 0
@@ -94,10 +96,11 @@ const deleteContactFromList = value => {
 
 	if (getDataFromLocalStore().length === 0) {
 		console.log('No contacts to show')
+
+		editIsActive = !editIsActive
 		contactTable.style.display = 'none'
 		submitBtn.style.display = 'initial'
 	}
-	form.reset()
 }
 
 const editContact = item => {
@@ -125,15 +128,16 @@ const editContact = item => {
 
 const saveEditedValues = item => {
 	editIsActive = !editIsActive
+	//deleting contact that is being saved from LS
 	deleteContactFromList(item)
-
 	manageValueStoring(getValues())
+	form.reset()
 	form.style.display = 'none'
 
 	let contactInfo = getDataFromLocalStore()
 	contactList.innerHTML = ''
 	contactInfo.forEach(item => renderContact(item))
-	submitBtn.style.display = 'block'
+	submitBtn.style.display = 'initial'
 }
 
 const renderContact = item => {
@@ -146,9 +150,9 @@ const renderContact = item => {
 		<td contenteditable="false">${item.email}</td>
 		<td contenteditable="false">${item.address}</td>
 		<td contenteditable="false">${item.zip}</td>
-		<td><button class="btn" onclick="deleteContactFromList(${
-			item.id
-		})" >Delete</button></td>
+		<td><button class="btn" ${
+			editIsActive ? 'disabled' : ''
+		} onclick="deleteContactFromList(${item.id})" >Delete</button></td>
 		<td><button class="btn btn-edit" ${
 			editIsActive ? 'disabled' : ''
 		}  onclick="editContact(${item.id})">Edit</button></td>
@@ -163,31 +167,43 @@ const renderContact = item => {
 // Event listeners
 
 showAll.addEventListener('click', () => {
-	form.style.display = 'none'
-
-	if (getDataFromLocalStore().length > 0) {
-		let contactInfo = getDataFromLocalStore()
-
-		contactList.innerHTML = ''
-		contactInfo.forEach(item => renderContact(item))
-		contactTable.style.display = 'block'
+	if (editIsActive) {
+		messages.push('Save edit before viewing all contacts')
+		errorMessage.innerText = messages
+		messages.length = 0
 	} else {
-		contactTable.style.display = 'none'
+		form.style.display = 'none'
 
-		if (messages.length === 0) {
-			messages.push('No existing contacts found')
-			errorMessage.innerText = messages
+		if (getDataFromLocalStore().length > 0) {
+			let contactInfo = getDataFromLocalStore()
+
+			contactList.innerHTML = ''
+			contactInfo.forEach(item => renderContact(item))
+			contactTable.style.display = 'block'
 		} else {
-			errorMessage.innerText = messages
+			contactTable.style.display = 'none'
+
+			if (messages.length === 0) {
+				messages.push('No existing contacts found')
+				errorMessage.innerText = messages
+			} else {
+				errorMessage.innerText = messages
+			}
 		}
 	}
 })
 
 addNew.addEventListener('click', () => {
-	messages.length = 0
-	errorMessage.innerText = messages
-	form.style.display = 'block'
-	contactTable.style.display = 'none'
+	if (editIsActive) {
+		messages.push('Save edit before adding new contact')
+		errorMessage.innerText = messages
+		messages.length = 0
+	} else {
+		messages.length = 0
+		errorMessage.innerText = messages
+		form.style.display = 'block'
+		contactTable.style.display = 'none'
+	}
 })
 
 form.addEventListener('submit', e => {
